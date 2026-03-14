@@ -41,6 +41,7 @@ public class DosenDemo26 {
             dosen.cetakData();
             System.out.println("-----------------------");
         }
+        sc.close();
 
         DataDosen26 data = new DataDosen26();
 
