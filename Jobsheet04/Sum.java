@@ -1,4 +1,4 @@
-package Jobsheet05;
+package Jobsheet04;
 
 public class Sum {
     double keuntungan [];
