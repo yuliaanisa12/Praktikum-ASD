@@ -1,60 +1,82 @@
 package Jobsheet05;
 
 public class MahasiswaBerprestasi26 {
-    Mahasiswa26 listMhs[];
+    Mahasiswa26[] listMhs;
     int idx;
 
-    MahasiswaBerprestasi26(int kapasitas) {
-    listMhs = new Mahasiswa26[kapasitas];
-}
+    
+    public MahasiswaBerprestasi26(int kapasitas) {
+        listMhs = new Mahasiswa26[kapasitas];
+        idx = 0;
+    }
 
-    void tambah (Mahasiswa26 m) {
+    void tambah(Mahasiswa26 m) {
         if (idx < listMhs.length) {
             listMhs[idx] = m;
             idx++;
-        } else{
+        } else {
             System.out.println("Data sudah penuh");
         }
     }
+
     void tampil() {
-        for (Mahasiswa26 m:listMhs) {
-            m.tampilInformasi();
+        for (int i = 0; i < idx; i++) {
+            listMhs[i].tampilInformasi();
             System.out.println("------------------------");
         }
     }
-    void bubbleSort() {
-        for (int i=0; i<listMhs.length-1; i++) {
-            for (int j=1; j<listMhs.length-i; j++) {
-                if (listMhs[j].ipk > listMhs[j-1].ipk) {
-                    Mahasiswa26 temp = listMhs[j];
-                    listMhs[j] = listMhs[j-1];
-                    listMhs[j-1] = temp;
+    
+    void selectionSort() {
+        for (int i = 0; i < idx - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < idx; j++) {
+                if (listMhs[j].ipk < listMhs[min].ipk) {
+                    min = j;
                 }
             }
+            Mahasiswa26 tmp = listMhs[min];
+            listMhs[min] = listMhs[i];
+            listMhs[i] = tmp;
         }
     }
-    void selectionSort() {
-    for (int i = 0; i < idx - 1; i++) {
-        int min = i;
-        for (int j = i + 1; j < idx; j++) {
-            if (listMhs[j].ipk < listMhs[min].ipk) {
-                min = j;
+
+    int sequentialSearching(double cari) {
+        for (int i = 0; i < idx; i++) {
+            if (Math.abs(listMhs[i].ipk - cari) < 0.01) {
+                return i;
             }
         }
-        Mahasiswa26 tmp = listMhs[min];
-        listMhs[min] = listMhs[i];
-        listMhs[i] = tmp;
+        return -1;
     }
-}
-void insertionSortDESC() {
-    for (int i = 1; i < idx; i++) {
-        Mahasiswa26 temp = listMhs[i];
-        int j = i;
-        while (j > 0 && listMhs[j - 1].ipk > temp.ipk) {
-            listMhs[j] = listMhs[j - 1];
-            j--;
+
+    void tampilPosisi(double x, int pos) {
+        if (pos != -1) {
+            System.out.println("Data ditemukan di indeks ke-" + pos);
+        } else {
+            System.out.println("Data dengan IPK " + x + " tidak ditemukan");
         }
-        listMhs[j] = temp;
+    }
+
+    void tampilData(double x, int pos) {
+        if (pos != -1) {
+            listMhs[pos].tampilInformasi();
+        } else {
+            System.out.println("Data mahasiswa dengan IPK " + x + " tidak ditemukan");
         }
+    }
+
+    int findBinarySearch(double cari, int left, int right) {
+        if (right >= left) {
+            int mid = (left + right) / 2;
+
+            if (Math.abs(listMhs[mid].ipk - cari) < 0.01) {
+                return mid;
+            } else if (listMhs[mid].ipk < cari) {
+                return findBinarySearch(cari, left, mid - 1);
+            } else {
+                return findBinarySearch(cari, mid + 1, right);
+            }
+        }
+        return -1;
     }
 }

@@ -1,28 +1,24 @@
 package Jobsheet05;
 
 public class Mahasiswa26 {
-    String nim;
-    String nama;
-    String kelas;
+         
+    String nim, nama, kelas;
     double ipk;
 
-    //konstruktor default
-    Mahasiswa26() {
+    Mahasiswa26() {}
 
-    }
-
-    //konstruktor berparameter(dibuat ada ayang parameter inputnya sama ada yang tidak)
     Mahasiswa26(String nm, String name, String kls, double ip) {
         nim = nm;
         nama = name;
-        kelas = kls;
         ipk = ip;
+        kelas = kls;
     }
 
     void tampilInformasi() {
-        System.out.println("Nama: " + nama);
-        System.out.println("NIM: " + nim);
+        System.out.println("Nama : " + nama);
+        System.out.println("NIM  : " + nim);
         System.out.println("Kelas: " + kelas);
-        System.out.println("IPK: " + ipk);
+        System.out.println("IPK  : " + ipk);
     }
 }
+
