@@ -31,7 +31,8 @@ public class MahasiswaDemo26 {
             list.tambah(m);
         }
 
-        list.selectionSort();
+        list.bubbleSort();
+        list.tampil();
 
         System.out.println("\nPencarian Data");
         System.out.print("Masukkan IPK yang dicari: ");

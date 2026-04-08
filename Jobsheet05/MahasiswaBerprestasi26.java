@@ -25,7 +25,17 @@ public class MahasiswaBerprestasi26 {
             System.out.println("------------------------");
         }
     }
-    
+    void bubbleSort() {
+        for (int i = 0; i < idx - 1; i++) {
+            for (int j = 0; j < idx - i - 1; j++) {
+                if (listMhs[j].ipk > listMhs[j + 1].ipk) {
+                    Mahasiswa26 tmp = listMhs[j];
+                    listMhs[j] = listMhs[j + 1];
+                    listMhs[j + 1] = tmp;
+                }
+            }
+        }
+    }
     void selectionSort() {
         for (int i = 0; i < idx - 1; i++) {
             int min = i;
