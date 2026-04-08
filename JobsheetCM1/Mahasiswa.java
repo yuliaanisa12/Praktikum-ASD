@@ -11,8 +11,7 @@ public class Mahasiswa {
         this.Prodi = Prodi;
     }
     void tampil(){
-        System.out.println("nim |);
-        System.out.println("nama: " + nama);
-        System.out.println("Program Studi: " + Prodi);
+        System.out.println(nim +"|" + nama + "|" + Prodi);
+       
     }
 }
