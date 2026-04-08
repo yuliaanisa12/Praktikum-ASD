@@ -29,21 +29,27 @@ public class MahasiswaDemo26 {
 
             Mahasiswa26 m = new Mahasiswa26(nim, nama, kelas, ipk);
             list.tambah(m);
+            System.out.println();
+
         }
 
         list.bubbleSort();
         list.tampil();
 
+        System.out.println("================================");
         System.out.println("\nPencarian Data");
+        System.out.println("================================");
         System.out.print("Masukkan IPK yang dicari: ");
         double cari = Double.parseDouble(sc.nextLine());
 
+        System.out.println("==================================");
         System.out.println("\nMenggunakan Binary Search");
+        System.out.println("==================================");
 
-        int posisi = list.findBinarySearch(cari, 0, n - 1);
+        int posisi2 = list.findBinarySearch(cari, 0, n - 1);
 
-        list.tampilPosisi(cari, posisi);
-        list.tampilData(cari, posisi);
+        list.tampilPosisi(cari, posisi2);
+        list.tampilData(cari, posisi2);
 
         sc.close();
     }

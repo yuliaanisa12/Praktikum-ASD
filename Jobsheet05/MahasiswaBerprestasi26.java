@@ -4,7 +4,6 @@ public class MahasiswaBerprestasi26 {
     Mahasiswa26[] listMhs;
     int idx;
 
-    
     public MahasiswaBerprestasi26(int kapasitas) {
         listMhs = new Mahasiswa26[kapasitas];
         idx = 0;
@@ -25,6 +24,7 @@ public class MahasiswaBerprestasi26 {
             System.out.println("------------------------");
         }
     }
+
     void bubbleSort() {
         for (int i = 0; i < idx - 1; i++) {
             for (int j = 0; j < idx - i - 1; j++) {
@@ -36,6 +36,7 @@ public class MahasiswaBerprestasi26 {
             }
         }
     }
+
     void selectionSort() {
         for (int i = 0; i < idx - 1; i++) {
             int min = i;
@@ -76,13 +77,14 @@ public class MahasiswaBerprestasi26 {
     }
 
     int findBinarySearch(double cari, int left, int right) {
+        int mid;
         if (right >= left) {
-            int mid = (left + right) / 2;
+            mid = (left + right) / 2;
 
-            if (Math.abs(listMhs[mid].ipk - cari) < 0.01) {
-                return mid;
-            } else if (listMhs[mid].ipk < cari) {
-                return findBinarySearch(cari, left, mid - 1);
+            if (listMhs[mid].ipk == cari) {
+                return (mid);
+            } else if (listMhs[mid].ipk > cari) {
+                 return findBinarySearch(cari, left, mid - 1);
             } else {
                 return findBinarySearch(cari, mid + 1, right);
             }
