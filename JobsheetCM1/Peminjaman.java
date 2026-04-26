@@ -3,27 +3,26 @@ package JobsheetCM1;
 public class Peminjaman {
     Mahasiswa mhs;
     Buku buku;
-    int lamaPinjam;
-    int denda;
+    int lamaPinjam, denda;
 
-    public Peminjaman(Mahasiswa mhs, Buku buku, int lamaPinjam) {
+    Peminjaman(Mahasiswa mhs, Buku buku, int lamaPinjam) {
         this.mhs = mhs;
         this.buku = buku;
         this.lamaPinjam = lamaPinjam;
-        this.denda = 0;
+        hitungDenda();
     }
-    void hitungDenda() {
-        int batas = 5;
-        int dendaPerHari = 2000;
 
-        if(lamaPinjam > batas) {
-            denda = (lamaPinjam - batas) * dendaPerHari;
+    void hitungDenda() {
+        if (lamaPinjam > 5) {
+            int terlambat = lamaPinjam - 5;
+            denda = terlambat * 2000;
         } else {
-            denda = 0 ;
+            denda = 0;
         }
     }
+
     void tampil() {
-        System.out.println(mhs.nim + "|" + mhs.nama + "|"+ buku.judul + "|" + lamaPinjam + " hari |Denda: " + denda);
+        System.out.printf("| %-5s | %-10s | %-15s | %-5d | Rp %-7d |\n",
+                mhs.nim, mhs.nama, buku.judulBuku, lamaPinjam, denda);
     }
 }
-

@@ -1,20 +1,17 @@
 package JobsheetCM1;
 
 public class Buku {
-    String kodeBuku;
-    String judul;
-    int  tahunTerbit;
+    String kodeBuku, judulBuku;
+    int tahunTerbit;
 
-    public Buku(String kodeBuku, String judul, int tahunTerbit) {
+
+    Buku(String kodeBuku, String judulBuku, int tahunTerbit) {
         this.kodeBuku = kodeBuku;
-        this.judul = judul;
-        this.tahunTerbit = tahunTerbit;    
+        this.judulBuku = judulBuku;
+        this.tahunTerbit = tahunTerbit;
     }
+
     void tampil() {
-        System.out.println(kodeBuku +"|" + judul + "|" + tahunTerbit);
-       
+        System.out.printf("| %-5s | %-15s | %-5d |\n", kodeBuku, judulBuku, tahunTerbit);
     }
-
-
-    
 }

@@ -1,4 +1,5 @@
 package JobsheetCM1;
+
 import java.util.Scanner;
 
 public class ClassMain {
@@ -13,7 +14,7 @@ public class ClassMain {
         };
 
         Buku[] buku = {
-                new Buku("B001", "Algortima", 2020),
+                new Buku("B001", "Algoritma", 2020),
                 new Buku("B002", "Basis Data", 2019),
                 new Buku("B003", "Pemrograman", 2021),
                 new Buku("B004", "Fisika", 2024)
@@ -34,7 +35,7 @@ public class ClassMain {
             System.out.println("1. Tampilkan Mahasiswa");
             System.out.println("2. Tampilkan Buku");
             System.out.println("3. Tampilkan Peminjaman");
-            System.out.println("4. Urutkan berdasarkan Denda");
+            System.out.println("4. Urutkan berdasarkan Denda + Hitung");
             System.out.println("5. Cari berdasarkan NIM");
             System.out.println("0. Keluar\n");
             System.out.print("Pilih Menu: ");
@@ -44,45 +45,43 @@ public class ClassMain {
             switch (pilih) {
 
                 case 1:
-                    System.out.println("DATA MAHASISWA");
-                    System.out.println("--------------------------------------------------");
-                    System.out.printf("| %-5s | %-10s | %-25s |\n", "NIM", "Nama", "Prodi");
-                    System.out.println("--------------------------------------------------");
+                    System.out.println("\nDATA MAHASISWA");
+                    System.out.println("-----------------------------------------------------------------------");
+                    System.out.printf("| %-5s | %-10s | %-25s | %-13s |\n",
+                            "NIM", "Nama", "Prodi", "no_hp");
+                    System.out.println("-----------------------------------------------------------------------");
 
-                    for (int i = 0; i < mhs.length; i++) {
-                        mhs[i].tampil();
+                    for (Mahasiswa m : mhs) {
+                        m.tampil();
                     }
-
-                    System.out.println("--------------------------------------------------");
                     break;
 
                 case 2:
                     System.out.println("\nDATA BUKU");
-                    System.out.println("-----------------------------------");
-                    System.out.printf("| %-5s | %-15s | %-5s |\n", "Kode", "Judul", "Tahun");
-                    System.out.println("-----------------------------------");
+                    System.out.println("-------------------------------------------------------------");
+                    System.out.printf("| %-5s | %-15s | %-5s | %-15s |\n",
+                            "Kode", "Judul", "Tahun", "Penerbit");
+                    System.out.println("-------------------------------------------------------------");
 
-                    for (int i = 0; i < buku.length; i++) {
-                        buku[i].tampil();
+                    for (Buku b : buku) {
+                        b.tampil();
                     }
-
-                    System.out.println("-----------------------------------");
                     break;
 
                 case 3:
                     System.out.println("\nDATA PEMINJAMAN");
-                    System.out.println("-------------------------------------------------------------");
-                    System.out.printf("| %-5s | %-10s | %-15s | %-5s | %-10s |\n", "NIM", "Nama", "Judul Buku", "Hari","Denda");
-                    System.out.println("-------------------------------------------------------------");
+                    System.out.println("---------------------------------------------------------------------");
+                    System.out.printf("| %-5s | %-10s | %-15s | %-5s | %-10s |\n",
+                            "NIM", "Nama", "Judul Buku", "Hari", "Denda");
+                    System.out.println("---------------------------------------------------------------------");
 
-                    for (int i = 0; i < pinjam.length; i++) {
-                        pinjam[i].tampil();
+                    for (Peminjaman p : pinjam) {
+                        p.tampil();
                     }
-
-                    System.out.println("-------------------------------------------------------------");
                     break;
 
                 case 4:
+                    // SORTING (descending berdasarkan denda) - Insertion Sort
                     for (int i = 1; i < pinjam.length; i++) {
                         Peminjaman temp = pinjam[i];
                         int j = i - 1;
@@ -94,77 +93,51 @@ public class ClassMain {
                         pinjam[j + 1] = temp;
                     }
 
-                    System.out.println("\nDATA SETELAH SORTING DENDA");
-                    System.out.println("-------------------------------------------------------------");
-                    System.out.printf("| %-5s | %-10s | %-15s | %-5s | %-10s |\n", "NIM", "Nama", "Judul Buku", "Hari",
-                            "Denda");
-                    System.out.println("-------------------------------------------------------------");
-
+                    // Tampilkan hasil sorting
+                    System.out.println("\nData setelah diurutkan (denda terbesar ke kecil):");
                     for (int i = 0; i < pinjam.length; i++) {
                         pinjam[i].tampil();
                     }
 
-                    System.out.println("-------------------------------------------------------------");
-                    break;
+                    // HITUNG MAHASISWA UNIK YANG KENA DENDA
+                    String[] nimSudah = new String[pinjam.length];
+                    int jumlah = 0;
 
-                case 5:
-                    System.out.print("Masukkan NIM yang dicari: ");
-                    String cari = sc.next();
+                    for (int i = 0; i < pinjam.length; i++) {
+                        if (pinjam[i].denda > 0) {
+                            boolean sudah = false;
 
-                    for (int i = 0; i < pinjam.length - 1; i++) {
-                        for (int j = i + 1; j < pinjam.length; j++) {
-                            if (pinjam[i].mhs.nim.compareTo(pinjam[j].mhs.nim) > 0) {
-                                Peminjaman tmp = pinjam[i];
-                                pinjam[i] = pinjam[j];
-                                pinjam[j] = tmp;
+                            for (int k = 0; k < jumlah; k++) {
+                                if (nimSudah[k] != null && nimSudah[k].equals(pinjam[i].mhs.nim)) {
+                                    sudah = true;
+                                    break;
+                                }
+                            }
+
+                            if (!sudah) {
+                                nimSudah[jumlah] = pinjam[i].mhs.nim;
+                                jumlah++;
                             }
                         }
                     }
 
-                    int left = 0, right = pinjam.length - 1;
-                    boolean ditemukan = false;
+                    System.out.println("\nJumlah mahasiswa yang memiliki denda: " + jumlah);
+                    break;
 
-                    while (left <= right) {
-                        int mid = (left + right) / 2;
+                case 5:
+                    System.out.print("Masukkan NIM: ");
+                    String cari = sc.next();
 
-                        if (pinjam[mid].mhs.nim.equals(cari)) {
-                            System.out.println("\nDATA DITEMUKAN");
-                            System.out.println("-------------------------------------------------------------");
-                            System.out.printf("| %-5s | %-10s | %-15s | %-5s | %-10s |\n", "NIM", "Nama", "Judul Buku","Hari", "Denda");
-                            System.out.println("------------------------------------------------------------");
-                            pinjam[mid].tampil();
-                            System.out.println("-------------------------------------------------------------");
-                            ditemukan = true;
-                            break;
-
-                        } else if (pinjam[mid].mhs.nim.compareTo(cari) < 0) {
-                            left = mid + 1;
-                        } else {
-                            right = mid - 1;
+                    for (Peminjaman p : pinjam) {
+                        if (p.mhs.nim.equals(cari)) {
+                            p.tampil();
                         }
                     }
-
-                    if (!ditemukan) {
-                        System.out.println("Data tidak ditemukan");
-                    }
-
                     break;
-
-                case 0:
-                    System.out.println("Terima kasih");
-                    break;
-
-                default:
-                    System.out.println("Menu tidak tersedia");
             }
 
         } while (pilih != 0);
 
+        sc.close();
     }
-
 }
-
-
-
-    
-

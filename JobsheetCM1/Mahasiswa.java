@@ -1,17 +1,17 @@
 package JobsheetCM1;
 
 public class Mahasiswa {
-    String nim;
-    String nama;
-    String Prodi;
+    String nim, nama, prodi;
 
-    public Mahasiswa(String nim,String nama,String Prodi) {
+    Mahasiswa(String nim, String nama, String prodi) {
         this.nim = nim;
         this.nama = nama;
-        this.Prodi = Prodi;
+        this.prodi = prodi;
+      
     }
-    void tampil(){
-        System.out.println(nim +"|" + nama + "|" + Prodi);
-       
+
+    void tampil() {
+        System.out.printf("| %-5s | %-10s | %-25s |\n",
+                nim, nama, prodi);
     }
 }
