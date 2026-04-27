@@ -1,3 +1,4 @@
+package Quiz1;
 
 public class Aksesoris26 {
 
