@@ -1,5 +1,4 @@
 
-
 public class Mahasiswa26 {
     String nim;
     String nama;
@@ -12,7 +11,7 @@ public class Mahasiswa26 {
         this.kelas = kelas;
         this.ipk = ipk;
     }
-    public void tampilkanInformasi() {
+    public void tampilInformasi() {
          System.out.printf("%-10s %-12s %-5s %.1f\n",nama,nim,kelas,ipk);
     }
 }

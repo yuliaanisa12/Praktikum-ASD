@@ -1,93 +1,95 @@
+
 public class QueueLinkedList {
-
-    NodeTugas front;
-    NodeTugas rear;
+    NodeAntrian26 head;
+    NodeAntrian26 tail;
     int size;
-    int max = 10;
 
-    boolean isEmpty() {
-
-        return front == null;
+    public QueueLinkedList() {
+        head = null;
+        tail = null;
+        size = 0;
     }
 
-    boolean isFull() {
-        return size == max;
+    public boolean isEmpty() {
+        return head == null;
     }
 
-    void clear() {
-        if (!isEmpty()) {
-            front = rear = null;
-            size = 0;
-            System.out.println("Antrian berhasil dikosongkan");
-        } else {
-            System.out.println("Antrian masih kosong");
-        }
+    public boolean isFull() {
+        return false; 
     }
 
-    void enqueue(TugasMahasiswa input) {
-        if (isFull()) {
-            System.out.println("Antrian penuh");
-        } else {
-            NodeTugas ndInput = new NodeTugas(input, null);
-            if (isEmpty()) {
-                front = rear = ndInput;
-            } else {
-                rear.next = ndInput;
-                rear = ndInput;
-            }
-            size++;
-
-            System.out.println( input.nama + " berhasil masuk antrian");
-        }
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
+        System.out.println("Antrian dikosongkan");
     }
 
-    void dequeue() {
+    public void enqueue(Antrian26 data) {
+        NodeAntrian26 newNode = new NodeAntrian26(data);
         if (isEmpty()) {
-            System.out.println("Antrian kosong");
+            head = newNode;
+            tail = newNode;
         } else {
-            System.out.println("Antrian dipanggil :");
-            front.data.tampilIformasi();
-            front = front.next;
-            size--;
-            if (front == null) {
-                rear = null;
-            }
+            tail.next = newNode;
+            tail = newNode;
         }
+        size++;
+        System.out.println(data.nama + " berhasil ditambahkan ke antrian\n");
     }
 
-    void peekFront() {
-        if (!isEmpty()) {
-            System.out.println( "Antrian terdepan :");
-            front.data.tampilIformasi();
-        } else {
-            System.out.println("Antrian kosong");
+    public void dequeue() {
+        if (isEmpty()) {
+            System.out.println("Antrian kosong!\n");
+            return;
         }
+        System.out.println("Mahasiswa dipanggil");
+        head.data.tampilAntrian26();
+        head = head.next;
+        if (head == null) tail = null;
+        size--;
+        System.out.println();
     }
 
-    void peekRear() {
-        if (!isEmpty()) {
-            System.out.println("Antrian terakhir :");
-            rear.data.tampilIformasi();
+    public void peekFront() {
+        if (isEmpty()) {
+            System.out.println("Antrian kosong!\n");
+            return;
         } else {
-            System.out.println("Antrian kosong");
-        }
-    }
-
-    void print() {
-        if (!isEmpty()) {
-            NodeTugas temp = front;
-            System.out.println("Isi Antrian:");
-            while (temp != null) {
-                temp.data.tampilIformasi();
-                temp = temp.next;
-            }
+            System.out.println("Antrian terdepan:");
+            head.data.tampilAntrian26();
             System.out.println();
-        } else {
-            System.out.println("Antrian kosong");
         }
     }
 
-    void jumlahAntrian() {
-        System.out.println("Jumlah mahasiswa mengantri : " + size);
+    public void peekRear() {
+        if (isEmpty()) {
+            System.out.println("Antrian kosong!\n");
+            return;
+        } else {
+            System.out.println("Antrian terakhir:");
+            tail.data.tampilAntrian26();
+            System.out.println();
+        }
+    }
+
+    public void jumlahAntrian() {
+        System.out.println("Jumlah mahasiswa dalam antrian: " + size + "\n");
+    }
+
+    public void tampilkanSemua() {
+        if (isEmpty()) {
+            System.out.println("Antrian kosong!\n");
+            return;
+        }
+        NodeAntrian26 tmp = head;
+        int index = 1;
+        System.out.println("Daftar Mahasiswa dalam Antrian:");
+        while (tmp != null) {
+            System.out.println("Antrian ke-" + index + " :");
+            tmp.data.tampilAntrian26();
+            tmp = tmp.next;
+            index++;
+        }
     }
 }

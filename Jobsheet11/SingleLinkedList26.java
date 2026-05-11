@@ -13,7 +13,7 @@ public class SingleLinkedList26 {
             NodeMahasiswa26 tmp = head;
             System.out.println("Isi Linked List:");
             while (tmp!= null) {
-                tmp.data.tampilkanInformasi();
+                tmp.data.tampilInformasi();
                 tmp = tmp.next;
             }
             System.out.println("");
@@ -82,7 +82,7 @@ public class SingleLinkedList26 {
         for (int i = 0; i < index; i++) {
             tmp = tmp.next;
         }
-        tmp.data.tampilkanInformasi();
+        tmp.data.tampilInformasi();
     }
 
     public int indexOf(String key) {

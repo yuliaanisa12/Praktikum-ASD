@@ -13,7 +13,7 @@ public class SLLMain26 {
 
         // tampil data index 1
         System.out.println("data index 1 : ");
-        sll.head.data.tampilkanInformasi();
+        sll.head.data.tampilInformasi();
 
         // cari index bimon
         System.out.println(
