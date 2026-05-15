@@ -1,24 +1,28 @@
 package Jobsheet12;
 
 public class Mahasiswa26 {
-    String nim;
     String nama;
+    String nim;
     String kelas;
     double ipk;
-
-    public Mahasiswa26(String nim, String nama, String kelas, double ipk) {
-        this.nim = nim;
+    public Mahasiswa26(String nama, String nim, String kelas, double ipk) {
         this.nama = nama;
+        this.nim = nim;
         this.kelas = kelas;
         this.ipk = ipk;
     }
-
-    public void tampil() {
-        System.out.println(
-                "NIM      : " + nim + 
-                "\nNama     : " + nama +
-                "\nKelas    : " + kelas + 
-                "\nIPK      : " + ipk
-        );
+    void tampilInformasi() {
+        System.out.printf("%-10s %-10s %-5s %-10.2f\n", nama, nim, kelas, ipk);
+    }
+    public static Mahasiswa26 inputMahasiswa(Scanner sc) {
+        System.out.print("Nama   : ");
+        String nama = sc.nextLine();
+        System.out.print("NIM    : ");
+        String nim = sc.nextLine();
+        System.out.print("Kelas  : ");
+        String kelas = sc.nextLine();
+        System.out.print("IPK    : ");
+        double ipk = Double.parseDouble(sc.nextLine());
+        return new Mahasiswa26(nama, nim, kelas, ipk);
     }
 }
