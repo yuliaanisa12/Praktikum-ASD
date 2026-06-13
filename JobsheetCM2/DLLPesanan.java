@@ -25,7 +25,7 @@ public class DLLPesanan {
     public void sortByNama() {
         if (head == null || head.next == null) return;  // jika ksng /1node tdk sort
         NodePesanan i = head;                           // pointer luar mulai dari head
-        while (i != null) {                             // loop semua node dri depan
+        while (i != null)        {                             // loop semua node dri depan
             NodePesanan j = i.next;                     // pointer dlm mulai dri node stelah i
             while (j != null) {                         // loop node setelah i smpai akhir
                 if (i.data.namaPesanan.compareToIgnoreCase(j.data.namaPesanan) > 0) { 
@@ -39,13 +39,15 @@ public class DLLPesanan {
             i = i.next; // maju ke node berikutnya
         }
     }
+
+    
     // method menampilkan semua pesnan ke layar
     public void tampilPesanan() {
         if (head == null) {  // juka tdak ada pesanan 
             System.out.println("Belum ada pesanan.");
             return;     //keluar dari method
         }
-        sortByNama();  //urutan sebelum tampil
+        sortByHargaPesanan();  //urutan sebelum tampil
         System.out.println("======================================");
         System.out.println("LAPORAN PESANAN (URUT NAMA PESANAN)");
         System.out.println("======================================");
@@ -60,4 +62,31 @@ public class DLLPesanan {
         System.out.println("--------------------------------------");
         System.out.println("Total Pendapatan: " + total);   // tampil total pendapatan
     }
+    public int getSize() {
+        int jumlah = 0;
+        NodePesanan current = head;
+        while (current != null) {
+            jumlah++;
+            current = current.next;
+        }
+        return jumlah;
+    }
+
+    public void sortByHargaPesanan() {
+        int n = getSize();
+
+        for (int i = 0; i < n - 1; i++) {
+            NodePesanan current = head;
+            for (int j = 0; j < n - i - 1; j++) {
+                if (current.data.harga > current.next.data.harga) {
+                    Pesanan temp = current.data;
+                    current.data = current.next.data;
+                    current.next.data = temp;
+                }
+                current = current.next;
+            }
+        }
+    }
+
+
 }

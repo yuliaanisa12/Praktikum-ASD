@@ -68,5 +68,6 @@ public class DLLAntrian {
     // method cek apakah antrian kosong
     public boolean isEmpty() {
         return head == null;
+
     }
 }

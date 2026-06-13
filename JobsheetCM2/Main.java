@@ -42,6 +42,7 @@ public class Main {
                         System.out.println("Antrian kosong! tidak ada pembeli yang dapat dilayani.");
                         break; // btal kembali menu
                     }
+
                     System.out.print("Kode Pesanan : ");
                     int kodePesanan = sc.nextInt();
                     sc.nextLine();
@@ -49,8 +50,11 @@ public class Main {
                     String namaPesanan = sc.nextLine();
                     System.out.print("Harga        : ");
                     int harga = sc.nextInt();
+                    System.out.print("jumlah:" ); // tambah3  
+                    int jumlah = sc.nextInt(); 
+                    int total = harga * jumlah;
+                    System.out.println("Total harga: " + total);
                     sc.nextLine();
-
                     Pembeli selesai = antrian.hapusAntrian();  // ambil & hps pling depan antrian
                     pesanan.tambahPesanan(kodePesanan, namaPesanan, selesai.namaPembeli, harga); // simpan pesan ke DLLPesan
                     System.out.println(selesai.namaPembeli + " telah memesan " + namaPesanan + " dengan harga " + harga);
@@ -68,6 +72,6 @@ public class Main {
                 default: // jika pilih selain 0-4
                     System.out.println("Pilihan tidak valid!");
             }
-        } while (pilihan != 0); // ulang loop selama plh bkn 0
+        } while (pilihan != 0); // ulang loop selama plh bkn
     }
 } 
